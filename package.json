@@ -1,0 +1,27 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "dev:renderer": "vite --config src/renderer/vite.config.ts",
+    "dev:main": "tsc -p tsconfig.main.json --watch",
+    "dev:electron": "wait-on http://localhost:5173 && electron .",
+    "dev": "concurrently -k -n RENDERER,MAIN,ELECTRON -c cyan,green,magenta \"npm:dev:renderer\" \"npm:dev:main\" \"npm:dev:electron\""
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.10.2",
+    "concurrently": "^9.2.0",
+    "currently": "^0.0.8",
+    "electron": "^37.1.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0",
+    "wait-on": "^8.0.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.1.1"
+  }
+}
