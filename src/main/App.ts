@@ -2,6 +2,7 @@ import path from "path";
 
 import { app, BrowserWindow, ipcMain } from "electron";
 import { Database } from "better-sqlite3";
+import { GetAllCitiesController } from "./controllers/Cities/GetAllCities.controller";
 
 export class App {
   private db: Database;
@@ -42,9 +43,9 @@ export class App {
   }
 
   private routes(): void {
-    ipcMain.handle("getAllCities", () => {
-      const response = this.db.prepare("SELECT * FROM cities").all();
-      return response;
-    });
+    // Cities
+    ipcMain.handle("getAllCities", GetAllCitiesController.execute(this.db));
+    // const response = this.db.prepare("SELECT * FROM cities").all();
+    // return response;
   }
 }
