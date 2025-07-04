@@ -6,13 +6,12 @@ interface CitySchema {
 }
 
 export class City {
-  props: CitySchema;
+  private props: CitySchema;
 
-  constructor({ code, id, name, uf }: CitySchema) {
-    this.props.id = id;
-    this.props.code = code;
-    this.props.name = name;
-    this.props.uf = uf;
+  constructor(props: CitySchema) {
+    this.props = {
+      ...props,
+    };
   }
 
   /////////////

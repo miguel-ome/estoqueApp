@@ -2,7 +2,7 @@ import path from "path";
 
 import { app, BrowserWindow, ipcMain } from "electron";
 import { Database } from "better-sqlite3";
-import { GetAllCitiesController } from "./controllers/Cities/GetAllCities.controller";
+import { GetAllCitiesUseCase } from "./useCases/City/GetAllCities.useCase";
 
 export class App {
   private db: Database;
@@ -29,7 +29,7 @@ export class App {
       },
     });
 
-    if (true) {
+    if (false) {
       win.loadURL("http://localhost:5173");
     } else {
       win.loadFile(path.join(__dirname, "../renderer/index.html"));
@@ -44,8 +44,6 @@ export class App {
 
   private routes(): void {
     // Cities
-    ipcMain.handle("getAllCities", GetAllCitiesController.execute(this.db));
-    // const response = this.db.prepare("SELECT * FROM cities").all();
-    // return response;
+    ipcMain.handle("getAllCities", () => GetAllCitiesUseCase.execute());
   }
 }
